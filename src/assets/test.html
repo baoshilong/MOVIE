@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div :style="rr" class="red"></div>
+    <div class="blue"></div>
+    <div class="red"></div>
+</div>
+
+<script>
+    var app=new Vue({
+        el:'#app',
+        data(){
+            return {
+                rr:{
+                    backgroundColor:'green'
+        }
+            }
+        },
+        computed(){
+            return {
+                rrr(){
+                    return {marginLeft:this.rr.marginLeft+'px'};
+                }
+            }
+        }
+    });
+    $.ajax({
+        url:'https://api.douban.com/v2/movie/in_theaters',
+        type:'GET',
+        data:{count:3},
+        dataType:'jsonp',
+        success:function(data){
+            console.log(data);
+        }
+    })
+</script>
+</body>
+</html>
+
+<style>
+    .red{
+        width:100px;
+        height:100px;
+        background-color: red;
+    }
+    .blue{
+        width:100px;
+        height:100px;
+        background-color: blue;
+    }
+    .green{
+        width:100px;
+        height:100px;
+        background-color: green;
+    }
+</style>

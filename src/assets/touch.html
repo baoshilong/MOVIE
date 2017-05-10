@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="swiper-3.4.2.min.js"></script>
+
+
+</head>
+<body>
+<div id="el">
+
+    <div class="flexBox swiper-container" :style="getFlex">
+        <div :class="rrr">1</div>
+        <div class="blue">2</div>
+        <div class="green">3</div>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide red">slider1</div>
+            <div class="swiper-slide blue">slider2</div>
+            <div class="swiper-slide green">slider3</div>
+        </div>
+    </div>
+
+    <button @click="fC">flex-direction is {{this.$data._flexDirection[fCounter]}}</button>
+    <button @click="jC">justify-content is {{this.$data._justifyContent[jCounter]}}</button>
+</div>
+<script>
+    var a=Swiper('swiper-container'
+
+    );
+
+
+    var example2 = new Vue({
+        el: '#el',
+        data(){
+            return{
+                _flexDirection:['row','row-reverse','column','column-reverse'],
+                _justifyContent:['flex-start','flex-end','center','space-between','space-around'],
+                obj:{haha:1,xixi:2},
+                fCounter:0,
+                jCounter:0
+                rr:{
+                    margin-left:200
+                }
+
+            }
+
+
+        },
+        computed:{
+            getFlex(){
+                return {
+                    flexDirection:this.$data._flexDirection[this.fCounter],
+                    justifyContent:this.$data._justifyContent[this.jCounter]
+
+                }
+            }
+            rrr(){
+               return this.rr.marginLeft+'px'
+            }
+        },
+        mounted(){
+            var a=Swiper('swiper-container',{
+
+            })
+
+        },
+        destroyed(){
+
+        },
+
+        // 在 `methods` 对象中定义方法
+        methods: {
+
+            fC() {
+                if(this.fCounter>=3)this.fCounter=-1;
+                this.fCounter+=1;
+                console.log(this._flexDirection);
+                this.rr.marginLeft+=100;
+
+            },
+            jC(){
+                if(this.jCounter>=4)this.jCounter=-1;
+                this.jCounter+=1;
+            }
+        }
+    })
+
+
+
+</script>
+</body>
+</html>
+<style>
+    .flexBox{
+        /*display: flex;*/
+        flex-direction: row;
+        justify-content: center;
+        height: 1000px;
+        width: 1000px;
+        background-color: #8e8e93;
+    }
+    .flexBox div{
+        height:200px;
+        width: 200px;
+    }
+    .red{
+        background-color: red;
+    }
+    .blue{
+        background-color: blue;
+    }
+    .green{
+        background-color: green;
+    }
+</style>
